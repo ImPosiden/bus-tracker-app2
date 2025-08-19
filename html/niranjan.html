@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Bus Live Tracker</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: #0d0d0d;
+        color: #e0e0e0;
+    }
+    header {
+        background-color: #0b0b0b;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 50px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    /* Logo styling */
+    .site-logo {
+        height: 150px; /* Bigger logo */
+        width: auto;
+        transition: transform 0.3s ease;
+    }
+    .logo-link {
+        display: flex;
+        align-items: center;
+    }
+    .logo-link:hover .site-logo {
+        transform: scale(1.1); /* Hover zoom effect */
+    }
+
+    nav {
+        display: flex;
+        gap: 35px;
+    }
+    nav a {
+        color: #e0e0e0;
+        text-decoration: none;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: 0.3s;
+        font-size: 1rem;
+    }
+    nav a i {
+        font-size: 1.2rem;
+        transition: transform 0.3s, color 0.3s;
+    }
+    nav a:hover {
+        color: #00bfff;
+    }
+    nav a:hover i {
+        transform: scale(1.2);
+        color: #00bfff;
+    }
+    .hero {
+        text-align: center;
+        padding: 80px 20px;
+        background: linear-gradient(135deg, #001f33, #004f88);
+    }
+    .hero h2 {
+        font-size: 3rem;
+        color: #00bfff;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+    .hero p {
+        max-width: 750px;
+        margin: 0 auto;
+        font-size: 1.2rem;
+        line-height: 1.7;
+        color: #d0d0d0;
+    }
+    .content {
+        padding: 60px 20px;
+        max-width: 1100px;
+        margin: auto;
+    }
+    /* Center specific headings */
+    .content h3 {
+        color: #00bfff;
+        margin-bottom: 12px;
+        font-size: 1.8rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+        text-align: center;
+    }
+    .content p {
+        line-height: 1.7;
+        margin-bottom: 28px;
+        font-size: 1rem;
+        color: #cccccc;
+        text-align: center;
+    }
+    .section-divider {
+        height: 2px;
+        background: linear-gradient(to right, transparent, #00bfff, transparent);
+        margin: 50px 0;
+    }
+    /* Step-by-step styles */
+    .how-to-use-steps {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        margin-top: 40px;
+    }
+    .step {
+        text-align: center;
+    }
+    .dotted-line {
+        border-left: 3px dotted #00bfff;
+        height: 80px;
+        margin: 20px auto;
+    }
+    .laptop-container {
+        position: relative;
+        display: inline-block;
+    }
+    .laptop-img {
+        width: 600px;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .zoom-circle {
+        position: absolute;
+        top: 20%;
+        left: 55%;
+        width: 120px;
+        height: 120px;
+        border: 4px solid #00bfff;
+        border-radius: 50%;
+        background-color: rgba(0, 191, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translate(-50%, -50%);
+    }
+    .cursor-icon {
+        width: 40px;
+        height: auto;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <a href="project2.html" class="logo-link">
+        <img src="logo.png" alt="College Bus Tracker Logo" class="site-logo">
+    </a>
+    <nav>
+        <a href="#"><i class="fa-solid fa-bus"></i> Track Your Bus</a>
+        <a href="#"><i class="fa-solid fa-bell"></i> Notify Me</a>
+        <a href="#"><i class="fa-solid fa-circle-info"></i> About Us</a>
+        <a href="#"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Track Your College Bus in Real Time</h2>
+    <p>Never miss your ride again. Our system lets you view the live location of your college buses, check available seats, and receive notifications when your bus is near your stop.</p>
+</section>
+
+<section class="content">
+    <h3><i class="fa-solid fa-circle-info"></i> What is this Website About?</h3>
+    <p>This platform provides real-time GPS tracking of college buses, so students and faculty can plan their journeys with accuracy and convenience. You can check exactly where your bus is and how many seats are left before you step out.</p>
+
+    <div class="section-divider"></div>
+
+    <h3><i class="fa-solid fa-play"></i> How to Use It?</h3>
+    <div class="how-to-use-steps">
+        <!-- Step 1 -->
+        <div class="step">
+            <div class="laptop-container">
+                <img src="laptop-with-site.png" alt="Laptop showing bus tracker" class="laptop-img">
+            </div>
+            <p style="margin-top:15px; font-size:1.1rem;">
+                Step 1: On your laptop, click <strong>Track Your Bus</strong> in the navigation bar.
+            </p>
+        </div>
+        <div class="dotted-line"></div>
+        <!-- Step 2 -->
+        <div class="step">
+            <p style="font-size:1.1rem; color:#999;">Step 2: Select your bus route and watch the live map update in real time.</p>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h3><i class="fa-solid fa-gears"></i> How It Works?</h3>
+    <p>Our system uses GPS devices installed in college buses to send location updates to our servers. These updates are displayed in real time on our website.</p>
+    <p>Seat availability is updated by the conductor or automated sensors in the bus, ensuring that the data you see is always accurate and up-to-date.</p>
+
+    <div class="section-divider"></div>
+
+    <h3><i class="fa-solid fa-star"></i> Why Choose Us?</h3>
+    <p>Unlike generic tracking apps, our platform is tailored specifically for your college routes. You get instant, relevant, and accurate updates without the clutter of irrelevant routes.</p>
+    <p>We prioritize speed, accuracy, and ease of use so you can focus on your day, not your commute.</p>
+
+    <div class="section-divider"></div>
+
+    <h3><i class="fa-solid fa-users"></i> About Our Team</h3>
+    <ul style="text-align: center; list-style-position: inside;">
+        <li>Adib (Back End)</li>
+        <li>Niranjan (Front End)</li>
+        <li>Dion (Front End)</li>
+        <li>Johan (Front End)</li>
+    </ul>
+</section>
+
+</body>
+</html>

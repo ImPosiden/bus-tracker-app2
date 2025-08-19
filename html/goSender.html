@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus GPS Sender</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #f0f2f5; }
+        .container { text-align: center; padding: 2rem; background-color: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        button { font-size: 1.2rem; padding: 1rem 2rem; border-radius: 8px; border: none; cursor: pointer; color: white; margin-bottom: 1rem; }
+        #startBtn { background-color: #28a745; }
+        #stopBtn { background-color: #dc3545; }
+        #status { font-size: 1.1rem; color: #555; min-height: 50px; padding: 10px; border-radius: 8px; background-color: #e9ecef; width: 90%; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Bus GPS Broadcaster</h1>
+    <button id="startBtn">Start Tracking</button>
+    <button id="stopBtn" disabled>Stop Tracking</button>
+    <div id="status">Status: Idle</div>
+</div>
+
+<script>
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const statusDiv = document.getElementById('status');
+    let watchId = null;
+
+    // !!! IMPORTANT !!!
+    // Replace this with your computer's actual Local IP Address
+    const SERVER_URL = 'http://192.168.1.35:3001/api/location';
+
+    startBtn.addEventListener('click', () => {
+        if (!navigator.geolocation) {
+            statusDiv.textContent = 'Geolocation is not supported by your browser.';
+            return;
+        }
+
+        statusDiv.textContent = 'Starting tracking...';
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        };
+
+        watchId = navigator.geolocation.watchPosition(success, error, options);
+    });
+
+    stopBtn.addEventListener('click', () => {
+        if (watchId) {
+            navigator.geolocation.clearWatch(watchId);
+            watchId = null;
+            statusDiv.textContent = 'Status: Stopped.';
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+        }
+    });
+
+    function success(pos) {
+        const { latitude, longitude } = pos.coords;
+        const locationData = { lat: latitude, lng: longitude };
+
+        statusDiv.innerHTML = `Transmitting...<br>Lat: ${latitude.toFixed(4)}, Lng: ${longitude.toFixed(4)}`;
+
+        // Send the data to your Node.js server
+        fetch(SERVER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(locationData)
+        }).catch(err => {
+            console.error('Failed to send location:', err);
+            statusDiv.textContent = 'Error: Could not connect to server.';
+        });
+    }
+
+    function error(err) {
+        statusDiv.textContent = `ERROR(${err.code}): ${err.message}`;
+    }
+
+</script>
+
+</body>
+</html>
